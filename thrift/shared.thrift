@@ -1058,6 +1058,8 @@ struct RegisterDomainRequest {
   140: optional string historyArchivalURI
   150: optional ArchivalStatus visibilityArchivalStatus
   160: optional string visibilityArchivalURI
+  // A large number for later cadence compatibility
+  500: optional string id
 }
 
 struct ListDomainsRequest {
