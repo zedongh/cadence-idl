@@ -67,6 +67,8 @@ message RegisterDomainRequest {
   string history_archival_uri = 11;
   ArchivalStatus visibility_archival_status = 12;
   string visibility_archival_uri = 13;
+  // a large number for cadence compatibility
+  string id = 50;
 }
 
 message RegisterDomainResponse {
