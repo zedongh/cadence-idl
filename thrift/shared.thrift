@@ -1488,6 +1488,7 @@ struct PendingActivityInfo {
   110: optional string lastFailureReason
   120: optional string lastWorkerIdentity
   130: optional binary lastFailureDetails
+  200: optional string startedIdentity
 }
 
 struct PendingDecisionInfo {
