@@ -204,6 +204,7 @@ message PollForActivityTaskRequest {
   TaskList task_list = 2;
   string identity = 3;
   TaskListMetadata task_list_metadata = 4;
+  bool non_blocking = 5;
 }
 
 message PollForActivityTaskResponse {
