@@ -69,6 +69,8 @@ struct DomainInfo {
   50: optional i64 (js.type = "Long") failoverEndTime
   52: optional i64 (js.type = "Long") previousFailoverVersion
   54: optional i64 (js.type = "Long") lastUpdatedTime
+  56: optional binary isolationGroupsConfiguration
+  58: optional string isolationGroupsConfigurationEncoding
 }
 
 struct HistoryTreeInfo {
@@ -136,6 +138,8 @@ struct WorkflowExecutionInfo {
   120: optional map<string, binary> memo
   122: optional binary versionHistories
   124: optional string versionHistoriesEncoding
+  126: optional binary firstExecutionRunID
+  128: optional map<string, string> partitionConfig
 }
 
 struct ActivityInfo {
@@ -220,6 +224,7 @@ struct TaskInfo {
   13: optional i64 (js.type = "Long") scheduleID
   14: optional i64 (js.type = "Long") expiryTimeNanos
   15: optional i64 (js.type = "Long") createdTimeNanos
+  17: optional map<string, string> partitionConfig
 }
 
 struct TaskListInfo {

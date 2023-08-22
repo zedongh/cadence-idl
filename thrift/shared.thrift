@@ -391,6 +391,8 @@ struct WorkflowExecutionInfo {
   50: optional WorkflowExecutionCloseStatus closeStatus
   60: optional i64 (js.type = "Long") historyLength
   70: optional string parentDomainId
+  71: optional string parentDomainName
+  72: optional i64 parentInitatedId
   80: optional WorkflowExecution parentExecution
   90: optional i64 (js.type = "Long") executionTime
   100: optional Memo memo
@@ -399,6 +401,7 @@ struct WorkflowExecutionInfo {
   120: optional string taskList
   130: optional bool isCron
   140: optional i64 (js.type = "Long") updateTime
+  150: optional map<string, string> partitionConfig
 }
 
 struct WorkflowExecutionConfiguration {
@@ -572,6 +575,7 @@ struct WorkflowExecutionStartedEventAttributes {
   121: optional SearchAttributes searchAttributes
   130: optional ResetPoints prevAutoResetPoints
   140: optional Header header
+  150: optional map<string, string> partitionConfig
 }
 
 struct ResetPoints{
@@ -1017,6 +1021,7 @@ struct DomainInfo {
 struct DomainConfiguration {
   10: optional i32 workflowExecutionRetentionPeriodInDays
   20: optional bool emitMetric
+  60: optional IsolationGroupConfiguration isolationgroups
   70: optional BadBinaries badBinaries
   80: optional ArchivalStatus historyArchivalStatus
   90: optional string historyArchivalURI
@@ -1307,6 +1312,7 @@ struct RequestCancelWorkflowExecutionRequest {
   30: optional string identity
   40: optional string requestId
   50: optional string cause
+  60: optional string firstExecutionRunID
 }
 
 struct GetWorkflowExecutionHistoryRequest {
@@ -1370,6 +1376,7 @@ struct TerminateWorkflowExecutionRequest {
   30: optional string reason
   40: optional binary details
   50: optional string identity
+  60: optional string firstExecutionRunID
 }
 
 struct ResetWorkflowExecutionRequest {
@@ -1517,6 +1524,7 @@ struct PendingActivityInfo {
   110: optional string lastFailureReason
   120: optional string lastWorkerIdentity
   130: optional binary lastFailureDetails
+  140: optional string startedWorkerIdentity
 }
 
 struct PendingDecisionInfo {
@@ -1799,6 +1807,7 @@ struct CrossClusterStartChildExecutionRequestAttributes {
   // targetRunID is for scheduling first decision task
   // targetWorkflowID is available in initiatedEventAttributes
   50: optional string targetRunID
+  60: optional map<string, string> partitionConfig
 }
 
 struct CrossClusterStartChildExecutionResponseAttributes {
@@ -1914,3 +1923,19 @@ struct RespondCrossClusterTasksCompletedRequest {
 struct RespondCrossClusterTasksCompletedResponse {
   10: optional list<CrossClusterTaskRequest> tasks
 }
+
+enum IsolationGroupState {
+  INVALID,
+  HEALTHY,
+  DRAINED,
+}
+
+struct IsolationGroupPartition {
+  10: optional string name
+  20: optional IsolationGroupState state
+}
+
+struct IsolationGroupConfiguration {
+  10: optional list<IsolationGroupPartition> isolationGroups
+}
+
