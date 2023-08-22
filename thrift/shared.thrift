@@ -1192,6 +1192,7 @@ struct PollForActivityTaskRequest {
   20: optional TaskList taskList
   30: optional string identity
   40: optional TaskListMetadata taskListMetadata
+  50: optional bool nonBlocking
 }
 
 struct PollForActivityTaskResponse {
